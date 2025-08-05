@@ -1,12 +1,15 @@
-from transaction import Transaction
+from menu import display_menu, quit_program, add_transaction
 
 def main():
-    t = Transaction("2025-08-05", "Food", "375.25", "Groceries")
-    t.date = input("Enter date of the transaction: ")
-    t.category = input("Enter the category of the transaction: ")
-    t.amount = input("Enter amount: ")
-    t.description = input("Enter description: ")
-    print(t)
+    menu_items = {
+        "1": add_transaction,
+        "q": quit_program
+    }
+
+    while True:
+        display_menu()
+        selection = input("Choose an option: ")
+        menu_items[selection]()
 
 if __name__ == "__main__":
     main()
