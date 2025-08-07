@@ -24,12 +24,18 @@ def add_transaction():
     transactions.append(Transaction(date, category, amount, description))
 
 def show_transactions():
+    total = 0
     print("Your Transactions:")
     print("#  Date       | Category        | Amount      | Description")
     print(f"-"*65)
     for index, t in enumerate(transactions, start=1):
         print(f"{index}. {t.date} | {t.category:<15} | ${t.amount:<10.2f} | {t.description}")
+    for t in transactions:
+        total += t.amount
     print(f"-"*65)
+    print(f"Total amount spent: {total}")
+    print(f"-"*65)
+
 
 def edit_transaction():
     show_transactions()
