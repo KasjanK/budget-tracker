@@ -1,8 +1,10 @@
-from menu import display_menu, quit_program, add_transaction
+from menu import display_menu, quit_program, add_transaction, show_transactions, edit_transaction
 
-def main():
+def main(): 
     menu_items = {
         "1": add_transaction,
+        "2": show_transactions,
+        "3": edit_transaction,
         "q": quit_program
     }
 
