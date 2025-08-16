@@ -1,4 +1,4 @@
-# 💰 Personal Budget Tracker
+# Personal Budget Tracker
 
 A Python command-line application to track personal expenses.  
 You can add, view, edit, and delete transactions, generate reports, and save your data to a file so it persists across runs.
