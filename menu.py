@@ -1,6 +1,12 @@
 import sys
 from transaction import Transaction
 
+# TODO: import/export to/from csv file,
+#       fix proper dating system,
+#       check for right inputs, string for date and float for amount etc,
+#       add monthly expenses like subscriptions, rent etc,
+#       sort monthly report from highest to lowest
+
 transactions = [
     Transaction(date="2025-07-14", category="Food", amount=15.99, description="Grocery shopping"),
     Transaction(date="2025-07-15", category="Rent", amount=8004.2, description="Monthly rent"),

@@ -1,6 +1,12 @@
 from menu import display_menu, quit_program, add_transaction, show_transactions, edit_transaction, show_monthly_report
+import os
 
-def main(): 
+def main():
+    if not os.path.exists("transactions.csv"):
+        with open("transactions.csv", "x") as file:
+            file.write("date,category,amount,description")
+            file.close()
+
     menu_items = {
         "1": add_transaction,
         "2": show_transactions,
