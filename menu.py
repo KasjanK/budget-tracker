@@ -1,4 +1,5 @@
 import sys
+import csv
 from transaction import Transaction
 
 # TODO: import/export to/from csv file,
@@ -7,12 +8,7 @@ from transaction import Transaction
 #       add monthly expenses like subscriptions, rent etc,
 #       sort monthly report from highest to lowest
 
-transactions = [
-    Transaction(date="2025-07-14", category="Food", amount=15.99, description="Grocery shopping"),
-    Transaction(date="2025-07-15", category="Rent", amount=8004.2, description="Monthly rent"),
-    Transaction(date="2025-07-16", category="Transport", amount=3.50, description="Bus fare"),
-    Transaction(date="2025-07-14", category="Food", amount=15.99, description="Grocery shopping"),
-]
+
 
 def display_menu():
     print("1. Add a new transaction")
@@ -24,14 +20,33 @@ def display_menu():
 def quit_program():
     sys.exit()
 
-def add_transaction():
+def load_transactions():
+    transactions = []
+    with open("transactions.csv", "r", newline="") as file:
+        reader = csv.reader(file)
+        next(reader)
+        for row in reader:
+            transactions.append(Transaction.from_csv(row))
+    return transactions
+
+def save_transactions(transactions):
+    with open("transactions.csv", "w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(["date", "category", "amount", "description"])
+        for transaction in transactions:
+            writer.writerow(transaction.to_csv())
+
+def add_transaction(transactions):
     date = input("Enter date of the transaction: ")
     category = input("Enter the category of the transaction: ")
     amount = float(input("Enter amount: "))
     description = input("Enter description: ")
-    transactions.append(Transaction(date, category, amount, description))
 
-def show_transactions():
+    transaction = Transaction(date, category, amount, description)
+    transactions.append(transaction)
+    save_transactions(transactions)
+
+def show_transactions(transactions):
     total = 0
     print("Your Transactions:")
     print("#  Date       | Category        | Amount      | Description")
@@ -44,8 +59,7 @@ def show_transactions():
     print(f"Total amount spent: {total:.2f}")
     print(f"-"*65)
 
-
-def edit_transaction():
+def edit_transaction(transactions):
     show_transactions()
     selection = int(input("Choose a transaction to edit: "))
     transaction = transactions[selection - 1]
@@ -55,7 +69,7 @@ def edit_transaction():
     transaction.amount = float(input(f"Enter a new amount: (Current: {transaction.amount})"))
     transaction.description = input(f"Enter a new description: (Current: {transaction.description})")
 
-def show_monthly_report():
+def show_monthly_report(transactions):
     categories = {}
 
     for transaction in transactions:
