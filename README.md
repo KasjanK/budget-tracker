@@ -11,8 +11,8 @@ You can add, view, edit, and delete transactions, generate reports, and save you
 - View all expenses in a clean list
 - Edit or delete existing expenses
 - Generate a monthly report (totals per category, total spending)
-- (Ongoing) Save all transactions to a CSV file
-- (Ongoing) Automatically load transactions on startup
+- Save all transactions to a CSV file
+- Automatically load transactions on startup
 - (Planned) Category budgets with warnings
 - (Planned) Data visualization with charts
 
