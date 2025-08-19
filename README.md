@@ -60,7 +60,7 @@ Enter description: Grocery shopping
 
 - [x] Add, view, edit, and delete expenses  
 - [x] Generate monthly reports  
-- [ ] Save and load transactions from CSV  
+- [x] Save and load transactions from CSV  
 - [ ] Implement recurring expenses  
 - [ ] Improve CLI design  
 - [ ] Optional: Build a simple GUI (Tkinter or Streamlit)  
