@@ -1,14 +1,11 @@
 import sys
 import csv
+import dateparser
 from transaction import Transaction
 
-# TODO: import/export to/from csv file,
-#       fix proper dating system,
-#       check for right inputs, string for date and float for amount etc,
+# TODO: parse different banks csv exports,
 #       add monthly expenses like subscriptions, rent etc,
-#       sort monthly report from highest to lowest
-
-
+#       cleanup 
 
 def display_menu():
     print("1. Add a new transaction")
@@ -37,9 +34,20 @@ def save_transactions(transactions):
             writer.writerow(transaction.to_csv())
 
 def add_transaction(transactions):
-    date = input("Enter date of the transaction: ")
+    while True:
+            date = input("Enter date of the transaction (YYYY-MM-DD, 'yesterday' or 'next): ")
+            date_obj = dateparser.parse(date)
+            if date_obj:
+                date = date_obj.date()
+            break
     category = input("Enter the category of the transaction: ")
-    amount = float(input("Enter amount: "))
+    while True:
+        try:
+            amount = float(input("Enter amount: "))
+            break
+        except ValueError:
+            print("Please enter a number:")
+            continue
     description = input("Enter description: ")
 
     transaction = Transaction(date, category, amount, description)
