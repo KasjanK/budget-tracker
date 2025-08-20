@@ -27,6 +27,7 @@ def load_transactions():
     return transactions
 
 def save_transactions(transactions):
+    transactions.sort(key=lambda t: t.date, reverse=True)
     with open("transactions.csv", "w", newline="") as file:
         writer = csv.writer(file)
         writer.writerow(["date", "category", "amount", "description"])
@@ -68,14 +69,25 @@ def show_transactions(transactions):
     print(f"-"*65)
 
 def edit_transaction(transactions):
-    show_transactions()
+    show_transactions(transactions)
     selection = int(input("Choose a transaction to edit: "))
     transaction = transactions[selection - 1]
-
-    transaction.date = input(f"Enter a new date: (Current: {transaction.date}) ")
+    while True:
+            transaction.date = input("Enter date of the transaction (YYYY-MM-DD, 'yesterday' or 'next): ")
+            date_obj = dateparser.parse(transaction.date)
+            if date_obj:
+                transaction.date = date_obj.date()
+            break
     transaction.category = input(f"Enter a new category: (Current: {transaction.category})")
-    transaction.amount = float(input(f"Enter a new amount: (Current: {transaction.amount})"))
+    while True:
+        try:
+            transaction.amount = float(input(f"Enter a new amount: (Current: {transaction.amount})"))
+            break
+        except ValueError:
+            print("Please enter a number")
+            continue
     transaction.description = input(f"Enter a new description: (Current: {transaction.description})")
+    save_transactions(transactions)
 
 def show_monthly_report(transactions):
     categories = {}
