@@ -33,10 +33,16 @@ git clone https://github.com/yourusername/budget-tracker.git
 cd budget-tracker
 ```
 
-### 2. Run the program
+### 2. Install requirements
 ```
-python main.py
+pip install -r reuirements.txt
 ```
+
+### 3. Run the program
+```
+python3 main.py
+```
+
 
 The program will automatically create a transactions.csv file if it doesn’t exist, and load your transactions if it does.
 
